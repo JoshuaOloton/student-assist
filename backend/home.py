@@ -1,12 +1,12 @@
 import streamlit as st
-import backend as rag_backend
+import rag as rag_backend
 
 st.title("Basic Chat App with RAG")
 st.subheader("Ask questions based on ingested text documents using Retrieval-Augmented Generation (RAG).", divider=True)
 
 with st.sidebar:
     st.text("Upload context")
-    user_query =st.text_area("Enter knowledge source", height=150)
+    user_query = st.text_area("Enter knowledge source", height=150)
     if st.button("Upload", use_container_width=True):
         if not user_query.strip():
             st.warning("Please enter some text to upload.")
