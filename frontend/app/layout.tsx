@@ -36,8 +36,8 @@ export default function RootLayout({
         <TooltipProvider>
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex-1">
-              <div className="flex items-center gap-4 px-4 py-3 bg-gray-100">
+            <main className="flex-1 flex flex-col">
+              <div className="flex items-center gap-4 px-4 py-3 bg-blue-100" >
                 <SidebarTrigger />
                 <Header />
               </div>

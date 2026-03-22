@@ -11,7 +11,7 @@ import {
 
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent } from "./ui/dropdown-menu"
 
-import { House, BookOpen, GraduationCap, DollarSign } from "lucide-react"
+import { House, BookOpen, GraduationCap, DollarSign, Search } from "lucide-react"
 import { Separator } from "./ui/separator"
 import AppLogo from "./app-logo"
 
@@ -25,16 +25,23 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="bg-blue-100 py-3">
+      <SidebarHeader className="bg-gray-100 py-3">
         <div className="flex items-center gap-2">
           <AppLogo />
           Quick Topics
         </div>
       </SidebarHeader>
-      <Separator />
+      {/* <Separator /> */}
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Search />
+                <span>Search Student Status</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <Separator />
             {quickTopics.map((topic, index) => (
               <SidebarMenuItem key={index}>
                 <SidebarMenuButton>

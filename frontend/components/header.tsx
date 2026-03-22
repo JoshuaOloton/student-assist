@@ -5,7 +5,7 @@ const Header = () => {
     <div className="flex items-center gap-2">
       <AppLogo />
       <div>
-        <h1 className="text-sm font-medium">FUOYE EduChat</h1>
+        <h1 className="text-sm font-medium">FUOYE AI Chat</h1>
         <p className="text-xs">Student Enquiry Assistant</p>
       </div>
     </div>
