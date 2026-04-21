@@ -21,12 +21,21 @@ export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState<string>("");
   const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const storedMessages = localStorage.getItem("messages");
-    if (storedMessages) {
-      setMessages(JSON.parse(storedMessages));
-      setHasMessages(true);
+    if (storedMessages?.length) {
+      try {
+        const parsedMessages = JSON.parse(storedMessages).map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        setMessages(parsedMessages);
+        setHasMessages(parsedMessages.length > 0);
+      } catch (e) {
+        console.error("Failed to parse stored messages:", e);
+      }
     }
   }, []);
 
@@ -36,20 +45,23 @@ export default function Page() {
 
   const sendMessage = () => {
     if (query.trim() === "") return;
-    
-    if(!hasMessages) {
+
+    if (!hasMessages) {
       setHasMessages(true);
     }
 
+    setError(null);
     setAwaitingResponse(true);
 
-    setMessages(prevMessages => [...prevMessages, {
+    const userMessage: Message = {
       id: crypto.randomUUID(),
       content: query,
       role: "user",
       timestamp: new Date()
-    }])
-    
+    };
+
+    setMessages(prevMessages => [...prevMessages, userMessage]);
+
     console.log("Sending message:", query);
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -63,13 +75,15 @@ export default function Page() {
           timestamp: new Date()
         };
         setMessages(prevMessages => [...prevMessages, aiMessage]);
+        setAwaitingResponse(false);
       })
       .catch(error => {
         console.error("Error sending message:", error);
+        setError("Failed to send message. Please try again.");
+        setAwaitingResponse(false);
       });
 
     setQuery("");
-    setAwaitingResponse(false);
   }
   
   return (

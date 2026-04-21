@@ -16,9 +16,10 @@ type ChatInputProps = {
   query: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSend: () => void;
+  disabled?: boolean;
 }
 
-const ChatInput = ({ query, onChange, onSend }: ChatInputProps) => {
+const ChatInput = ({ query, onChange, onSend, disabled = false }: ChatInputProps) => {
 
 
   return (
@@ -35,11 +36,13 @@ const ChatInput = ({ query, onChange, onSend }: ChatInputProps) => {
           }}
           placeholder="Ask about admission, courses, fees..."
           className="text-sm"
+          disabled={disabled}
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
             aria-label="Send"
             onClick={onSend}
+            disabled={disabled}
           >
             <ArrowUp />
           </InputGroupButton>

@@ -8,7 +8,7 @@ type MessageBubbleProps = {
 
 const MessageBubble = ({ content, role, timestamp }: MessageBubbleProps) => {
   return (
-    <div className="flex flex-row-reverse gap-3">
+    <div className={`flex gap-3 ${role === "user" ? "flex-row-reverse" : "flex-row"}`}>
       <div className="rounded-full h-8 w-8 bg-border flex items-center justify-center p-2">
         {role === "user" ? (
           <User/>
@@ -16,8 +16,8 @@ const MessageBubble = ({ content, role, timestamp }: MessageBubbleProps) => {
           <GraduationCap className="text-primary" />
         )}
       </div>
-      <div>
-        <div className="bg-primary text-white rounded-2xl rounded-tr-xs p-2">{content}</div>
+      <div className="max-w-1/2">
+        <div className={`${role === "user" ? "bg-primary text-white rounded-tr-xs" : "bg-white text-primary border border-primary rounded-tl-xs"} rounded-2xl p-2`}>{content}</div>
         <span className="text-xs text-muted-foreground">
           {timestamp.toLocaleTimeString().slice(0, 5)}
         </span>

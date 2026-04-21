@@ -10,7 +10,7 @@ import { GraduationCap } from "lucide-react";
 
 function TypingIndicator() {
   return (
-    <div className="flex items-start gap-3 py-2 md:px-6">
+    <div className="flex items-start gap-3 py-2">
       <Avatar className="size-8 shrink-0 border border-primary/20">
         <AvatarFallback className="bg-primary/10 text-primary">
           <GraduationCap className="size-4" />
@@ -33,6 +33,7 @@ type ChatMessagesProps = {
 const ChatMessages = ({ messages }: ChatMessagesProps) => {
   
   return (
+    console.log("Rendering ChatMessages with messages:", messages),
     <div className="mt-5">
       {messages.map(message => (
         <MessageBubble 
@@ -42,7 +43,7 @@ const ChatMessages = ({ messages }: ChatMessagesProps) => {
           timestamp={message.timestamp}
         />
       ))}
-      <TypingIndicator />
+      {/* <TypingIndicator /> */}
     </div>
   )
 }
