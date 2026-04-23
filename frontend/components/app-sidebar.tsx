@@ -14,6 +14,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuConten
 import { House, BookOpen, GraduationCap, DollarSign, Search } from "lucide-react"
 import { Separator } from "./ui/separator"
 import AppLogo from "./app-logo"
+import Link from "next/link"
 
 export function AppSidebar() {
   const quickTopics = [
@@ -38,7 +39,7 @@ export function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Search />
-                <span>Search Student Status</span>
+                <Link href="/student-lookup">Search Student Status</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <Separator />

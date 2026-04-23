@@ -37,7 +37,7 @@ const ChatWelcome = () => {
         <h4 className="font-bold text-2xl">Campus AI Assistant!</h4>
         <p className="text-center">Your AI-powered student enquiry assistant. Ask me anything about admissions, courses, fees, or campus life.</p>
       </div>
-      <div>
+      <div className="border grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-md">
         {welcomePaths.map((path, index) => (
           <div key={index} className="flex items-center gap-4 p-4 border rounded-md mb-2">
             <div className="text-primary bg-light rounded-4xl p-2 flex items-center justify-center"><path.icon /></div>

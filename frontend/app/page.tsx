@@ -8,6 +8,7 @@ import ChatWelcome from "@/components/chat-welcome";
 import { Sparkle, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "@/components/header";
 
 export interface Message {
   id: string;
@@ -88,6 +89,7 @@ export default function Page() {
   
   return (
     <div className="flex flex-col flex-1 justify-between px-4">
+      {/* <Header /> */}
       {hasMessages ? <ChatMessages messages={messages} /> : <ChatWelcome />}
       <ChatInput 
         query={query}
