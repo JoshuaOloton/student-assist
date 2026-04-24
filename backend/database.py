@@ -1,7 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-DATABASE_URL = "mssql+pyodbc://username:password@server:port/db_name?driver=ODBC+Driver+17+for+SQL+Server"
+# DATABASE_URL = "mssql+pyodbc://username:password@server:port/db_name?driver=ODBC+Driver+17+for+SQL+Server"
+
+DATABASE_URL = (
+    "mssql+pyodbc://@(localdb)\\MSSQLLocalDB/FuoyeProject"
+    "?driver=ODBC+Driver+17+for+SQL+Server"
+    "&trusted_connection=yes")
 
 engine = create_engine(
     DATABASE_URL,

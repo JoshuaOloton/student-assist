@@ -1,10 +1,12 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from constants import DEPARTMENTS
 from database import get_db
 
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 import rag
 import pyodbc
 
@@ -25,11 +27,6 @@ app.add_middleware(
 SERVER_NAME = "server_name"
 DATABASE_NAME = "db_name"
 
-conn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
-                      "Server=" + SERVER_NAME + ";"
-                      "Database=" + DATABASE_NAME + ";"
-                      "Trusted_Connection=yes;")
-
 class ChatRequest(BaseModel):
     message: str
 
@@ -37,11 +34,9 @@ class ChatResponse(BaseModel):
     answer: str
 
 class SearchRequest(BaseModel):
-    surname: str
-    firstname: str
-    program_name: str
-    program_type: str
-    level: str
+    matricnum: str
+    department: str
+    level: int
 
 @app.get("/")
 def index():
@@ -61,34 +56,39 @@ async def chat(request: ChatRequest):
 
 @app.post("/search")
 async def search(request: SearchRequest, db: Session = Depends(get_db)):
-    # cursor = conn.cursor()
-    # cursor.execute("SELECT * FROM students WHERE surname=? AND firstname=? AND program_name=? AND program_type=? AND level=?", 
-    #                (request.surname, request.firstname, request.program_name, request.program_type, request.level))
-    # rows = cursor.fetchall()
-    # results = []
-    # for row in rows:
-    #     results.append({
-    #         "id": row[0],
-    #         "surname": row[1],
-    #         "firstname": row[2],
-    #         "program_name": row[3],
-    #         "program_type": row[4],
-    #         "level": row[5]
-    #     })
+    try:
+        department_id = DEPARTMENTS.get(request.department)
 
-    db.execute("SELECT * FROM students WHERE surname=? AND firstname=? AND program_name=? AND program_type=? AND level=?",
-               (request.surname, request.firstname, request.program_name, request.program_type, request.level))
-    rows = db.fetchall()
-    results = []
-    for row in rows:
-        results.append({
-            "id": row[0],
-            "surname": row[1],
-            "firstname": row[2],
-            "program_name": row[3],
-            "program_type": row[4],
-            "level": row[5]
-        })
+        query = "SELECT id, surname, firstname FROM student_record WHERE matricnum LIKE :matricnum AND DepartmentID LIKE :department_id AND level LIKE :level"
+        result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
+        rows = result.fetchall()
+        results = []
+        for row in rows:
+            results.append({
+                "id": row[0],
+                "surname": row[1],
+                "firstname": row[2]
+            })
 
-    return {"results": results}
+        return {"results": results}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
     
+
+@app.get("/departments")
+def get_department_details(db: Session = Depends(get_db)):
+    try:
+        name_result = db.execute(
+            text("""
+                SELECT id, department
+                FROM FuoyeProject.dbo.department
+                ORDER BY department
+            """)
+        )
+        return [{
+            "department_id": row[0],
+            "department_name": row[1]
+        } for row in name_result]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
