@@ -8,11 +8,11 @@ import { CheckCircle2, Calendar, BookOpen, Users, ArrowRight } from 'lucide-reac
 
 export interface StudentInfo {
   id: string
-  matric_no: string
-  full_name: string
+  matricnum: string
+  surname: string
+  firstname: string
   email: string
-  program_name: string
-  program_type: string
+  department: string
   level: string
   enrollment_date: string
   status: string
@@ -24,6 +24,8 @@ interface StudentInfoCardProps {
 }
 
 export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) {
+  const fullName = `${student.surname} ${student.firstname}`
+
   const getStatusColor = (status: string) => {
     const statusMap: Record<string, string> = {
       active: 'bg-emerald-500/10 text-emerald-600 border-emerald-200',
@@ -35,6 +37,7 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
   }
 
   const getInitials = (name: string) => {
+    console.log('Generating initials for name:', name);
     return name
       .split(' ')
       .map((n) => n[0])
@@ -58,12 +61,12 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16 border-2 border-primary/20">
                 <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                  {getInitials(student.full_name)}
+                  {getInitials(fullName)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">{student.full_name}</h2>
-                <p className="text-sm text-muted-foreground">{student.matric_no}</p>
+                <h2 className="text-2xl font-bold text-foreground">{fullName}</h2>
+                <p className="text-sm text-muted-foreground">{student.matricnum}</p>
               </div>
             </div>
             <Badge className={`${getStatusColor(student.status)} border`}>
@@ -88,20 +91,11 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
                 <BookOpen className="h-3 w-3" />
                 Program
               </div>
-              <p className="text-sm font-medium text-foreground">{student.program_name}</p>
-            </div>
-
-            {/* Program Type */}
-            <div className="rounded-lg bg-muted/50 p-4">
-              <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                <Users className="h-3 w-3" />
-                Program Type
-              </div>
-              <p className="text-sm font-medium text-foreground">{student.program_type}</p>
+              <p className="text-sm font-medium text-foreground">{student.department}</p>
             </div>
 
             {/* Level */}
-            <div className="rounded-lg bg-muted/50 p-4">
+            <div className="rounded-lg bg-muted/50 p-4 sm:col-span-2">
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Level
               </p>

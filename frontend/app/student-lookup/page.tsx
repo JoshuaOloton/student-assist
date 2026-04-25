@@ -17,8 +17,9 @@ export default function StudentLookupPage() {
     setError(null)
     setSearchResult(null)
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
-      const response = await fetch('/api/students/search', {
+      const response = await fetch(`${apiUrl}/search`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ export default function StudentLookupPage() {
   return (
     <div className="min-h-dvh bg-background">
       {/* Main Content */}
-      <main className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
+      <main className="mx-auto max-w-4xl px-4 border">
         {!searchResult ? (
           <div className="space-y-6">
             <div className="rounded-lg border border-border/40 bg-accent/5 p-6 sm:p-8">

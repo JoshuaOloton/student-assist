@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -16,9 +16,8 @@ export interface StudentSearchFormProps {
 }
 
 export interface StudentSearchData {
-  matricNo: string
-  programName: string
-  programType: string
+  matricnum: string
+  department: string
   level: string
 }
 
@@ -33,22 +32,18 @@ const PROGRAM_NAMES = [
   'Psychology',
 ]
 
-const PROGRAM_TYPES = ['Full-Time', 'Part-Time', 'Online', 'Hybrid']
-
-const LEVELS = ['100', '200', '300', '400', 'Postgraduate']
+const LEVELS = ['100', '200', '300', '400', '500']
 
 export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFormProps) {
   const [formData, setFormData] = useState<StudentSearchData>({
-    matricNo: '',
-    programName: '',
-    programType: '',
+    matricnum: '',
+    department: '',
     level: '',
   })
 
   const [touched, setTouched] = useState({
-    matricNo: false,
-    programName: false,
-    programType: false,
+    matricnum: false,
+    department: false,
     level: false,
   })
 
@@ -63,12 +58,16 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
     setTouched((prev) => ({ ...prev, [field]: true }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault()
     if (isFormComplete) {
       onSubmit(formData)
     }
   }
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   return (
     <Card className="w-full border-border bg-card p-6">
@@ -88,9 +87,9 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
             <Input
               id="matric"
               placeholder="e.g., STU202400123"
-              value={formData.matricNo}
-              onChange={(e) => handleChange('matricNo', e.target.value)}
-              onBlur={() => handleBlur('matricNo')}
+              value={formData.matricnum}
+              onChange={(e) => handleChange('matricnum', e.target.value)}
+              onBlur={() => handleBlur('matricnum')}
               disabled={loading}
               className="mt-2"
             />
@@ -100,7 +99,7 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
           <Field>
             <FieldLabel htmlFor="program">Program Name</FieldLabel>
             <FieldDescription>Select your program</FieldDescription>
-            <Select value={formData.programName} onValueChange={(value) => handleChange('programName', value)}>
+            <Select value={formData.department} onValueChange={(value) => handleChange('department', value)}>
               <SelectTrigger id="program" disabled={loading} className="mt-2">
                 <SelectValue placeholder="Choose program" />
               </SelectTrigger>
@@ -113,25 +112,7 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
               </SelectContent>
             </Select>
           </Field>
-
-          {/* Program Type */}
-          <Field>
-            <FieldLabel htmlFor="type">Program Type</FieldLabel>
-            <FieldDescription>Select program type</FieldDescription>
-            <Select value={formData.programType} onValueChange={(value) => handleChange('programType', value)}>
-              <SelectTrigger id="type" disabled={loading} className="mt-2">
-                <SelectValue placeholder="Choose type" />
-              </SelectTrigger>
-              <SelectContent>
-                {PROGRAM_TYPES.map((type) => (
-                  <SelectItem key={type} value={type}>
-                    {type}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
-
+          
           {/* Level */}
           <Field>
             <FieldLabel htmlFor="level">Level</FieldLabel>
@@ -141,8 +122,8 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
                 <SelectValue placeholder="Choose level" />
               </SelectTrigger>
               <SelectContent>
-                {LEVELS.map((lv) => (
-                  <SelectItem key={lv} value={lv}>
+                {LEVELS.map((lv, index) => (
+                  <SelectItem key={lv} value={String(index + 1)}>
                     {lv}
                   </SelectItem>
                 ))}

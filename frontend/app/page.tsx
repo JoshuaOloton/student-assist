@@ -62,8 +62,7 @@ export default function Page() {
     };
 
     setMessages(prevMessages => [...prevMessages, userMessage]);
-
-    console.log("Sending message:", query);
+    
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     axios.post(`${apiUrl}/chat`, { message: query })
