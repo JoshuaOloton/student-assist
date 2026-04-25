@@ -57,23 +57,28 @@ async def chat(request: ChatRequest):
 @app.post("/search")
 async def search(request: SearchRequest, db: Session = Depends(get_db)):
     try:
-        department_id = DEPARTMENTS.get(request.department)
+        department_id = DEPARTMENTS.get(request.department.upper())
 
-        query = "SELECT id, surname, firstname FROM student_record WHERE matricnum LIKE :matricnum AND DepartmentID LIKE :department_id AND level LIKE :level"
+        query = "SELECT id, matricnum, surname, firstname, email, department, level, enrollment_date, status FROM vw_student_record WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
         result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
-        rows = result.fetchall()
-        results = []
-        for row in rows:
-            results.append({
-                "id": row[0],
-                "surname": row[1],
-                "firstname": row[2]
-            })
-
-        return {"results": results}
-
+        row = result.fetchone()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+    if not row:
+        raise HTTPException(status_code=404, detail="Student not found")
+    
+    return {
+        "id": row[0],
+        "matricnum": row[1],
+        "surname": row[2],
+        "firstname": row[3],
+        "email": row[4],
+        "department": row[5],
+        "level": row[6],
+        "enrollment_date": row[7],
+        "status": row[8]
+    }        
     
 
 @app.get("/departments")

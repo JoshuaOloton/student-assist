@@ -19,24 +19,19 @@ VECTORS_SEARCH_INDEX = "vector_index"  # Name of the vector search index
 MODEL_NAME = "gemini-2.5-flash-lite"  # LLM model name for generation
 LLM = ChatGoogleGenerativeAI(model=MODEL_NAME, streaming=True)
 
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
+db = client[DB_NAME]
+collection = db[COLLECTION_NAME]
+
+embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+vectors_store = MongoDBAtlasVectorSearch(
+    collection=collection, 
+    embedding=embedding,
+    index_name=VECTORS_SEARCH_INDEX
+)
+
 def get_vector_store():
     """Initialize and return the MongoDB Atlas Vector Search store with HuggingFace embeddings."""
-
-    print('MONGO_URI: ', MONGO_URI)
-
-    client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-    db = client[DB_NAME]
-    collection = db[COLLECTION_NAME]
-    # print(db)
-    # print(collection)
-
-    # embedding = GoogleGenerativeAIEmbeddings(client=client, model="model/embeddings-001")
-    embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-    vectors_store = MongoDBAtlasVectorSearch(
-        collection=collection, 
-        embedding=embedding,
-        index_name=VECTORS_SEARCH_INDEX
-    )
     return vectors_store
 
 
