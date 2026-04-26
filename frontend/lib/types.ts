@@ -7,8 +7,7 @@ export interface StudentSearchData {
 export interface StudentInfo {
   id: string
   matricnum: string
-  surname: string
-  firstname: string
+  fullname: string
   email: string
   department: string
   level: string

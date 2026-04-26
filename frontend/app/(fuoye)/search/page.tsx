@@ -4,17 +4,25 @@
 
 import { COLORS, } from "@/lib/constants";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import SearchForm from "@/components/search-form";
 import { StudentInfo, StudentSearchData } from "@/lib/types";
 import { StudentInfoCard } from "@/components/student-info-card";
+import React from "react";
 
 
 export default function SearchPage() {
   const [searched, setSearched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
-  const [searchResult, setSearchResult] = useState<StudentInfo | null>(null)
+  const [searchResult, setSearchResult] = useState<StudentInfo | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (searchResult && cardRef.current) {
+      cardRef.current.focus();
+    }
+  }, [searchResult]);
 
   const handleSearch = async (data: StudentSearchData) => {
       setLoading(true)
@@ -32,13 +40,16 @@ export default function SearchPage() {
         })
   
         if (!response.ok) {
+          if(response.status === 404) {
+            
+          }
           const errorData = await response.json()
           setError(errorData.error || 'An error occurred while searching')
           return
         }
   
-        const student = await response.json()
-        setSearchResult(student)
+        const student = await response.json();
+        setSearchResult(student);
       } catch (err) {
         setError('Failed to connect to the server. Please try again.')
         console.error('Search error:', err)
@@ -91,12 +102,12 @@ export default function SearchPage() {
 
         {searchResult && (
           <StudentInfoCard
+            ref={cardRef}
             student={searchResult}
             onNewSearch={handleNewSearch}
           />
         )}
       </div>
-      <style>{`@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }`}</style>
     </div>
   );
 }

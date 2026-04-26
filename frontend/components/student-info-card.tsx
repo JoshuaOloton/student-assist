@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { CheckCircle2, Calendar, BookOpen, ArrowRight } from 'lucide-react'
 import { StudentInfo } from '@/lib/types'
+import { forwardRef } from 'react'
 
 
 interface StudentInfoCardProps {
@@ -13,9 +14,7 @@ interface StudentInfoCardProps {
   onNewSearch: () => void
 }
 
-export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) {
-  const fullName = `${student.surname} ${student.firstname}`
-
+export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(({ student, onNewSearch }, ref) => {
   const getStatusColor = (status: string) => {
     const statusMap: Record<string, string> = {
       active: 'bg-emerald-500/10 text-emerald-600 border-emerald-200',
@@ -43,7 +42,7 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
   })
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" ref={ref} tabIndex={-1}>
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
         <Card className="border-border bg-linear-to-br from-card to-card/50 p-6">
           {/* Header with Status */}
@@ -51,11 +50,11 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16 border-2 border-primary/20">
                 <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                  {getInitials(fullName)}
+                  {getInitials(student.fullname)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">{fullName}</h2>
+                <h2 className="text-2xl font-bold text-foreground">{student.fullname}</h2>
                 <p className="text-sm text-muted-foreground">{student.matricnum}</p>
               </div>
             </div>
@@ -121,4 +120,4 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
       </Button>
     </div>
   )
-}
+})

@@ -1,7 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+from settings import settings
 
 # DATABASE_URL = "mssql+pyodbc://username:password@server:port/db_name?driver=ODBC+Driver+17+for+SQL+Server"
+
+# DATABASE_URL = settings.DATABASE_URL
 
 DATABASE_URL = (
     "mssql+pyodbc://@(localdb)\\MSSQLLocalDB/FuoyeProject"

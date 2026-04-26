@@ -23,9 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-SERVER_NAME = "server_name"
-DATABASE_NAME = "db_name"
-
 class ChatRequest(BaseModel):
     message: str
 
@@ -56,9 +53,14 @@ async def chat(request: ChatRequest):
 @app.post("/search")
 async def search(request: SearchRequest, db: Session = Depends(get_db)):
     try:
+        print('request data')
+        print(request.department)
+        print(request.matricnum)
+        print(request.level)
         department_id = DEPARTMENTS.get(request.department.upper())
+        print(department_id)
 
-        query = "SELECT id, matricnum, surname, firstname, email, department, level, enrollment_date, status FROM vw_student_record WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
+        query = "SELECT id, matricnum, fullname, email, department, level, enrollment_date, status FROM vw_student_record WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
         result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
         row = result.fetchone()
     except Exception as e:
@@ -70,13 +72,12 @@ async def search(request: SearchRequest, db: Session = Depends(get_db)):
     return {
         "id": row[0],
         "matricnum": row[1],
-        "surname": row[2],
-        "firstname": row[3],
-        "email": row[4],
-        "department": row[5],
-        "level": row[6],
-        "enrollment_date": row[7],
-        "status": row[8]
+        "fullname": row[2],
+        "email": row[3],
+        "department": row[4],
+        "level": row[5],
+        "enrollment_date": row[6],
+        "status": row[7]
     }        
     
 
