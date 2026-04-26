@@ -9,18 +9,24 @@ from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmb
 from langchain_mongodb import MongoDBAtlasVectorSearch
 import streamlit as st
 import certifi
+from settings import settings
+
+
+MONGO_URI = settings.MONGO_URI
+MONGO_DBNAME = settings.MONGO_DBNAME
+GEMINI_API_KEY = settings.GEMINI_API_KEY
 
 # MongoDB configuration constants
-MONGO_URI = st.secrets["MONGO_URI"] 
-DB_NAME = "esthers_db"  # Database name for storing vectors
+MONGO_URI = MONGO_URI 
+MONGO_DBNAME = MONGO_DBNAME  # Database name for storing vectors
 COLLECTION_NAME = "embeddings_stream" 
 VECTORS_SEARCH_INDEX = "vector_index"  # Name of the vector search index
 
 MODEL_NAME = "gemini-2.5-flash-lite"  # LLM model name for generation
-LLM = ChatGoogleGenerativeAI(model=MODEL_NAME, streaming=True)
+LLM = ChatGoogleGenerativeAI(model=MODEL_NAME, streaming=True, api_key=GEMINI_API_KEY)
 
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-db = client[DB_NAME]
+db = client[MONGO_DBNAME]
 collection = db[COLLECTION_NAME]
 
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")

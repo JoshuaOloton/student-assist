@@ -8,7 +8,6 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 import rag
-import pyodbc
 
 app = FastAPI()
 
