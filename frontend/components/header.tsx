@@ -1,45 +1,83 @@
 "use client";
 
-import AppLogo from "./app-logo";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, GraduationCap } from "lucide-react";
+import { COLORS } from "@/lib/constants";
+import Image from "next/image";
 
 const Header = () => {
-  const pathname = usePathname();
 
   return (
-    <header className="flex-1 bg-card/50 backdrop-blur-sm">
-      <div className="flex max-w-4xl items-center justify-between px-4 py-4 sm:py-6">
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-primary/10 p-2">
-            <GraduationCap className="h-6 w-6 text-primary" />
-          </div>
-          {pathname === "/" ? (
-            <div>
-              <h1 className="text-sm font-medium">FUOYE AI Chat</h1>
-              <p className="text-xs">Student Enquiry Assistant</p>
-            </div>
-          ) : (
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">
-                Student Lookup
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Find and verify student information
-              </p>
-            </div>
-          )}
-        </div>
-        { pathname !== "/" && (
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Back to Chat</span>
-            </Button>
-          </Link>
-        )}
+    <header
+      style={{
+        padding: "1rem 2rem",
+        borderBottom: `1px solid ${COLORS.border}`,
+        background: "white",
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+    >
+      <div
+        style={{
+          width: 36,
+          height: 36,
+          borderRadius: 10,
+          background: COLORS.softGreen,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image src="/fuoye-logo.jpg" alt="FUOYE Logo" width={60} height={60} />
+        {/* <GraduationCap /> */}
+      </div>
+      <div>
+        <p
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: 15,
+            fontWeight: 700,
+            color: COLORS.charcoal,
+            margin: 0,
+          }}
+        >
+          FUOYE AI Chat
+        </p>
+        <p
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: 12,
+            color: COLORS.muted,
+            margin: 0,
+          }}
+        >
+          Student Enquiry Assistant
+        </p>
+      </div>
+      <div
+        style={{
+          marginLeft: "auto",
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        <div
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+            background: "#22c55e",
+          }}
+        />
+        <span
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: 12,
+            color: COLORS.muted,
+          }}
+        >
+          Online
+        </span>
       </div>
     </header>
   );

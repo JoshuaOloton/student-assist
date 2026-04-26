@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter, Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppSidebar } from "@/components/app-sidebar";
 import Header from "@/components/header";
+import Sidebar from "@/components/sidebar";
+import { Toaster } from "sonner";
+import AuthProvider from "@/components/auth-provider";
 
 const nunitoSans = Nunito_Sans({variable:'--font-sans'});
 
@@ -33,18 +35,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased`}
       >
-        <TooltipProvider>
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="flex-1 flex flex-col">
-              <div className="flex gap-4 px-4 py-3" >
-                <SidebarTrigger />
-                <Header />
-              </div>
-              {children}
-            </main>
-          </SidebarProvider>
-        </TooltipProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
