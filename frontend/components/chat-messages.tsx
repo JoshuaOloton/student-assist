@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Message } from "@/app/page";
+import { Message } from "@/lib/types";
 import MessageBubble from "./message-bubble";
 import { GraduationCap } from "lucide-react";
 

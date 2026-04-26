@@ -3,13 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { COLORS, QUICK_TOPICS } from "@/lib/constants";
 import Header from "@/components/header";
-
-export interface Message {
-  id: string;
-  content: string;
-  role: "user" | "ai";
-  timestamp: Date;
-}
+import { Message } from "@/lib/types";
 
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -18,11 +12,28 @@ export default function Page() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    try {
+      const storedMessages = localStorage.getItem("messages");
+      if (!storedMessages) return;
+
+      const parsed  = JSON.parse(storedMessages);
+      if (Array.isArray(parsed)) {
+        setMessages(parsed as Message[]);
+      } else {
+        console.warn("stored messages is not array type");
+      }
+    } catch (e) {
+      console.error("Failed to parse stored messages:", e);
+    }
+  }, []);
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages]);
 
-  const sendMessage = async (text) => {
-    const userMsg = text || input.trim();
+  const sendMessage = async (query: string) => {
+    const userMsg = query || input.trim();
     if (!userMsg) return;
     setInput("");
     setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", content: userMsg, timestamp: new Date() }]);
@@ -38,8 +49,8 @@ export default function Page() {
           message: userMsg
         }),
       });
-      const data = await res.json();
-      const reply = data.content || "I'm sorry, I couldn't process that. Please try again.";
+      const data = await res.text();
+      const reply = data || "I'm sorry, I couldn't process that. Please try again.";
       setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: reply, timestamp: new Date() }]);
     } catch(e) {
       console.error("Error communicating with API:", e);
@@ -209,7 +220,7 @@ export default function Page() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage(input)}
             placeholder="Ask about admission, courses, fees..."
             style={{
               flex: 1,
@@ -222,7 +233,7 @@ export default function Page() {
             }}
           />
           <button
-            onClick={() => sendMessage()}
+            onClick={() => sendMessage(input)}
             disabled={!input.trim() || loading}
             style={{
               width: 36,

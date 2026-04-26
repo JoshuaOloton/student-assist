@@ -5,18 +5,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { CheckCircle2, Calendar, BookOpen, ArrowRight } from 'lucide-react'
+import { StudentInfo } from '@/lib/types'
 
-export interface StudentInfo {
-  id: string
-  matricnum: string
-  surname: string
-  firstname: string
-  email: string
-  department: string
-  level: string
-  enrollment_date: string
-  status: string
-}
 
 interface StudentInfoCardProps {
   student: StudentInfo
@@ -55,7 +45,7 @@ export function StudentInfoCard({ student, onNewSearch }: StudentInfoCardProps) 
   return (
     <div className="space-y-6">
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-        <Card className="border-border bg-gradient-to-br from-card to-card/50 p-6">
+        <Card className="border-border bg-linear-to-br from-card to-card/50 p-6">
           {/* Header with Status */}
           <div className="mb-6 flex items-start justify-between">
             <div className="flex items-center gap-4">
