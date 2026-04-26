@@ -92,6 +92,7 @@ const Sidebar = () => {
             }}
           >
             {session?.user?.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
               <img src={session.user.image} alt="User Avatar" className="w-full h-full rounded-[50%]" />
             ): (
               <UserRound />

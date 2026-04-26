@@ -31,17 +31,10 @@ export default function Page() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleGoogleLogin = () => {
+  const googleLogin = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      // onLogin({
-      //   name: "Nnamdi Okafor",
-      //   email: "nnamdi@fuoye.edu.ng",
-      //   avatar: "NO",
-      // });
-    }, 1400);
-  };
+    signIn("google", { callbackUrl: "/" });
+  }
 
   return (
     <div
@@ -174,7 +167,7 @@ export default function Page() {
               fontWeight: 300,
             }}
           >
-            FUOYE's AI-powered platform supports both students and administrators, offering an interactive chat assistant for student questions on admissions, fees, courses, and campus life, alongside a dedicated enquiry management interface for university staff to review and respond efficiently.
+            FUOYE&apos;s AI-powered platform supports both students and administrators, offering an interactive chat assistant for student questions on admissions, fees, courses, and campus life, alongside a dedicated enquiry management interface for university staff to review and respond efficiently.
           </p>
           <div style={{ display: "flex", gap: 32, marginTop: "3rem" }}>
             {[
@@ -249,7 +242,7 @@ export default function Page() {
 
           {/* Google Button */}
           <button
-            onClick={() => signIn("google", { callbackUrl: "/" })}
+            onClick={googleLogin}
             disabled={loading}
             style={{
               width: "100%",
@@ -370,7 +363,7 @@ export default function Page() {
               lineHeight: 1.6,
             }}
           >
-            By signing in you agree to FUOYE's{" "}
+            By signing in you agree to FUOYE&apos;s{" "}
             <span style={{ color: COLORS.emerald, cursor: "pointer" }}>
               Terms of Service
             </span>{" "}

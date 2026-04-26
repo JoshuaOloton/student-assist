@@ -2,13 +2,11 @@
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Message } from "@/app/page";
-import { useState } from "react";
 import MessageBubble from "./message-bubble";
 import { GraduationCap } from "lucide-react";
 
 
-
-function TypingIndicator() {
+export function TypingIndicator() {
   return (
     <div className="flex items-start gap-3 py-2">
       <Avatar className="size-8 shrink-0 border border-primary/20">

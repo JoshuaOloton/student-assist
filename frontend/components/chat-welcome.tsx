@@ -1,4 +1,4 @@
-import { BookOpen, CalendarDays, DollarSign, GraduationCap, MapPin, Sparkles } from "lucide-react"
+import { BookOpen, CalendarDays, DollarSign, GraduationCap, MapPin } from "lucide-react"
 import AppSparkles from "./app-sparkles";
 
 

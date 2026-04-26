@@ -5,12 +5,8 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
 } from "@/components/ui/input-group";
-import { SearchIcon, ArrowUp } from "lucide-react";
-
-import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
 type ChatInputProps = {
   query: string;

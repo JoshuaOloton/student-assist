@@ -1,8 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { toast } from "sonner";
 import Sidebar from "@/components/sidebar";
-import AuthProvider from "@/components/auth-provider";
 
 export default async function FuoyeLayout({
   children,

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { COLORS, QUICK_TOPICS } from "@/lib/constants";
-import { GraduationCap } from "lucide-react";
 import Header from "@/components/header";
 
 export interface Message {

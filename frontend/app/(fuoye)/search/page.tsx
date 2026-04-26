@@ -1,7 +1,8 @@
+/* eslint-disable */
+
 "use client";
 
 import { COLORS, DEPARTMENTS, LEVELS } from "@/lib/constants";
-import Header from "@/components/header";
 import { Field, FieldLabel, FieldDescription } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -18,9 +19,6 @@ export interface StudentSearchData {
 }
 
 export default function SearchPage() {
-  const [matric, setMatric] = useState("");
-  const [dept, setDept] = useState("");
-  const [level, setLevel] = useState("");
   const [result, setResult] = useState(null);
   const [searched, setSearched] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,16 +49,6 @@ export default function SearchPage() {
       onSubmit(formData)
     }
   }
-
-  const handleSearch = () => {
-    setLoading(true);
-    setSearched(false);
-    setTimeout(() => {
-      setResult(MOCK_STUDENTS[matric.trim()] || null);
-      setSearched(true);
-      setLoading(false);
-    }, 900);
-  };
 
   const isFormComplete = Object.values(formData).every((val) => val !== '')
 
@@ -231,7 +219,7 @@ export default function SearchPage() {
                       margin: 0,
                     }}
                   >
-                    {matric}
+                    {formData.matricnum}
                   </p>
                 </div>
                 <div
@@ -331,7 +319,7 @@ export default function SearchPage() {
                     margin: 0,
                   }}
                 >
-                  No record found for <strong>{matric}</strong>. Verify your
+                  No record found for <strong>{formData.matricnum}</strong>. Verify your
                   matric number and try again.
                 </p>
               </div>

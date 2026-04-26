@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter, Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { AppSidebar } from "@/components/app-sidebar";
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import { Toaster } from "sonner";
 import AuthProvider from "@/components/auth-provider";
 

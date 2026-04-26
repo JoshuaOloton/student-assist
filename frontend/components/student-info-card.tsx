@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { CheckCircle2, Calendar, BookOpen, Users, ArrowRight } from 'lucide-react'
+import { CheckCircle2, Calendar, BookOpen, ArrowRight } from 'lucide-react'
 
 export interface StudentInfo {
   id: string

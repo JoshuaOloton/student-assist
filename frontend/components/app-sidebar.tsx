@@ -9,8 +9,6 @@ import {
   SidebarMenuButton
 } from "@/components/ui/sidebar"
 
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent } from "./ui/dropdown-menu"
-
 import { House, BookOpen, GraduationCap, DollarSign, Search } from "lucide-react"
 import { Separator } from "./ui/separator"
 import AppLogo from "./app-logo"
