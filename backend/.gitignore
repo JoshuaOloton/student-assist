@@ -1,3 +1,4 @@
 .streamlit/
 __pycache__/
 home.py
+.env
