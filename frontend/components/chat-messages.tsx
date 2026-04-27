@@ -31,7 +31,6 @@ type ChatMessagesProps = {
 const ChatMessages = ({ messages }: ChatMessagesProps) => {
   
   return (
-    console.log("Rendering ChatMessages with messages:", messages),
     <div className="mt-5">
       {messages.map(message => (
         <MessageBubble 

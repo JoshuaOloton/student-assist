@@ -66,10 +66,6 @@ export function StudentSearchForm({ onSubmit, loading, error }: StudentSearchFor
     }
   }
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   return (
     <Card className="w-full border-border bg-card p-6">
       <form onSubmit={handleSubmit} className="space-y-6">

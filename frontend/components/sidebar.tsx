@@ -27,7 +27,6 @@ const AppSidebar = () => {
 
   const pathname = usePathname();
   const { data: session } = useSession();
-  console.log("Session in sidebar:", session);
 
   return (
     <Sidebar variant="inset">

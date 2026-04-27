@@ -56,7 +56,6 @@ def get_rag_response(query):
     docs = retriever.invoke(query)  # Get relevant documents for the query
 
     context_text = "\n\n".join([doc.page_content for doc in docs])  # Combine document contents into context
-    print('Context: ', context_text)
 
     # Define chat prompt template with system and human messages
     prompt = ChatPromptTemplate.from_messages([
@@ -83,7 +82,6 @@ def stream_rag_response_sync(query):
     docs = retriever.invoke(query)
     
     context_text = "\n\n".join([doc.page_content for doc in docs])
-    print('Context: ', context_text)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "Use the following context to answer:\n\n{context}"),
@@ -109,7 +107,6 @@ def stream_rag_response(query):
     docs = retriever.invoke(query)
 
     context_text = "\n\n".join([doc.page_content for doc in docs])
-    print('Context: ', context_text)
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", "Use the following context to answer:\n\n{context}"),

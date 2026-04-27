@@ -40,11 +40,7 @@ const SearchForm = ({ onSubmit, loading, error }: SearchFormProps) => {
     department: false,
     level: false,
   });
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
+  
   const handleChange = (field: keyof StudentSearchData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };

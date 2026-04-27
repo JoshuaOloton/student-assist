@@ -26,7 +26,6 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
   }
 
   const getInitials = (name: string) => {
-    console.log('Generating initials for name:', name);
     return name
       .split(' ')
       .map((n) => n[0])
