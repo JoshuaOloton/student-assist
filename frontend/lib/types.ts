@@ -20,4 +20,5 @@ export interface Message {
   content: string;
   role: "user" | "ai";
   timestamp: Date;
+  lastPrompt?: string;
 }

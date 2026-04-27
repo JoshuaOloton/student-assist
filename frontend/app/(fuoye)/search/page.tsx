@@ -8,7 +8,6 @@ import { useState, useRef, useEffect } from "react";
 import SearchForm from "@/components/search-form";
 import { StudentInfo, StudentSearchData } from "@/lib/types";
 import { StudentInfoCard } from "@/components/student-info-card";
-import React from "react";
 
 
 export default function SearchPage() {
