@@ -14,7 +14,7 @@ interface StudentInfoCardProps {
   onNewSearch: () => void
 }
 
-export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(({ student, onNewSearch }, ref) => {
+export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(function StudentInfoCard({ student, onNewSearch }, ref) {
   const getStatusColor = (status: string) => {
     const statusMap: Record<string, string> = {
       active: 'bg-emerald-500/10 text-emerald-600 border-emerald-200',

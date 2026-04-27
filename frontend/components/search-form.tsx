@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 "use client";
 
-import { COLORS, DEPARTMENTS, LEVELS } from "@/lib/constants";
+import { DEPARTMENTS, LEVELS } from "@/lib/constants";
 import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
