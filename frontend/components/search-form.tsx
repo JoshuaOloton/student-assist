@@ -15,9 +15,10 @@ import {
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { AlertCircle, CheckCircle2, ArrowLeft } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 import { StudentSearchData } from "@/lib/types";
+import Link from "next/link";
 
 
 
@@ -149,6 +150,17 @@ const SearchForm = ({ onSubmit, loading, error }: SearchFormProps) => {
             Find Student
           </>
         )}
+      </Button>
+      <Button
+        variant={"outline"}
+        type="submit"
+        className="md:hidden mt-4 w-full sm:w-auto"
+        size="lg"
+      >
+        <Link href={"/"} className="flex items-center">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to chat
+        </Link>
       </Button>
     </form>
   );
