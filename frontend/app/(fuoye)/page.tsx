@@ -4,60 +4,84 @@ import { useState, useEffect, useRef } from "react";
 import { COLORS, QUICK_TOPICS } from "@/lib/constants";
 import Header from "@/components/header";
 import { Message } from "@/lib/types";
-
+import { Responses } from "@/lib/responses";
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    try {
-      const storedMessages = localStorage.getItem("messages");
-      if (!storedMessages) return;
+  // useEffect(() => {
+  //   try {
+  //     const storedMessages = localStorage.getItem("messages");
+  //     if (!storedMessages) return;
 
-      const parsed  = JSON.parse(storedMessages);
-      if (Array.isArray(parsed)) {
-        setMessages(parsed as Message[]);
-      } else {
-        console.warn("stored messages is not array type");
-      }
-    } catch (e) {
-      console.error("Failed to parse stored messages:", e);
-    }
-  }, []);
+  //     const parsed  = JSON.parse(storedMessages);
+  //     if (Array.isArray(parsed)) {
+  //       setMessages(parsed as Message[]);
+  //     } else {
+  //       console.warn("stored messages is not array type");
+  //     }
+  //   } catch (e) {
+  //     console.error("Failed to parse stored messages:", e);
+  //   }
+  // }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages]);
 
-  const sendMessage = async (query: string) => {
+  const sendMessage = (query: string) => {
     const userMsg = query || input.trim();
     if (!userMsg) return;
-    setInput("");
+
     setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", content: userMsg, timestamp: new Date() }]);
+
     setLoading(true);
 
+    const delay = Math.floor(Math.random() * (10000 - 6000 + 1)) + 6000;
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    try {
-      const res = await fetch(`${apiUrl}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: userMsg
-        }),
-      });
-      const data = await res.text();
-      const reply = data || "I'm sorry, I couldn't process that. Please try again.";
-      setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: reply, timestamp: new Date() }]);
-    } catch(e) {
-      console.error("Error communicating with API:", e);
-      setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: "Connection error. Please check your network and try again.", timestamp: new Date() }]);
-    }
-    setLoading(false);
-  };
+    setTimeout(() => {
+      const options = Responses[query];
+
+      let reply =
+      !options || options.length === 0
+        ? "Sorry, I don't have a response for that right now."
+        : options[Math.floor(Math.random() * options.length)];
+      
+        setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: reply, timestamp: new Date() }]);
+
+        setLoading(false);
+    }, delay);
+  }
+
+  // const sendMessage = async (query: string) => {
+  //   const userMsg = query || input.trim();
+  //   if (!userMsg) return;
+  //   setInput("");
+  //   setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", content: userMsg, timestamp: new Date() }]);
+  //   setLoading(true);
+
+
+  //   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  //   try {
+  //     const res = await fetch(`${apiUrl}/chat`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         message: userMsg
+  //       }),
+  //     });
+  //     const data = await res.text();
+  //     const reply = data || "I'm sorry, I couldn't process that. Please try again.";
+  //     setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: reply, timestamp: new Date() }]);
+  //   } catch(e) {
+  //     console.error("Error communicating with API:", e);
+  //     setMessages((msg) => [...msg, { id: crypto.randomUUID(), role: "ai", content: "Connection error. Please check your network and try again.", timestamp: new Date() }]);
+  //   }
+  //   setLoading(false);
+  // };
 
   const empty = messages.length === 0;
 
@@ -205,23 +229,15 @@ export default function Page() {
       {/* Input */}
       <div style={{ padding: "1rem 2rem", borderTop: `1px solid ${COLORS.border}`, background: "white" }}>
         <div
-          style={{
-            maxWidth: 700,
-            margin: "0 auto",
-            display: "flex",
-            gap: 10,
-            alignItems: "center",
-            background: COLORS.softGreen,
-            borderRadius: 14,
-            padding: "8px 8px 8px 16px",
-            border: `1.5px solid ${COLORS.border}`,
-          }}
+          className="max-w-[700px] mx-auto my-0 flex gap-2.5 items-center bg-[#D6E2DB] rounded-2xl p-2 pl-4 border-2 border-[#C5D3CC]"
         >
           <input
+            disabled
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage(input)}
             placeholder="Ask about admission, courses, fees..."
+            className="flex-1 bg-transparent border-none outline-none text-sm font-serif text-[#D6E2DB] placeholder:text-[#9AA7A0]"
             style={{
               flex: 1,
               background: "transparent",

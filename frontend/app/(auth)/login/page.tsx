@@ -38,14 +38,7 @@ export default function Page() {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        background: COLORS.cream,
-        display: "flex",
-        fontFamily: "'Georgia','Times New Roman',serif",
-        overflow: "hidden",
-        position: "relative",
-      }}
+      className="min-h-dvh bg-[#fafdf7] flex overflow-hidden relative font-['Georgia','Times New Roman',serif]"
     >
       <GlowOrb
         classname="w-96 h-96 bg-[#4ade80] -top-24 -left-24"
@@ -56,44 +49,23 @@ export default function Page() {
 
       {/* Left Panel */}
       <div
-        style={{
-          flex: "0 0 52%",
-          backgroundColor: COLORS.forest,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "4rem 5rem",
-          position: "relative",
-          overflow: "hidden",
-        }}
+        className="flex-1 bg-[#1a4731] hidden md:flex flex-col justify-center py-16 px-20 relative overflow-hidden"
       >
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: 0.05,
-          }}
+          className="absolute inset-0 opacity-5"
         >
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
+              className="absolute border border-white rounded-[50%] top-1/2 left-1/2 -translate-1/2"
               style={{
-                position: "absolute",
-                border: "1px solid white",
-                borderRadius: "50%",
                 width: 80 + i * 60,
                 height: 80 + i * 60,
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%,-50%)",
               }}
             />
           ))}
         </div>
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <div className="relative z-10">
           <div
             style={{
               display: "flex",
@@ -219,12 +191,7 @@ export default function Page() {
             <Image src="/fuoye-logo.jpg" alt="FUOYE Logo" width={60} height={60} />
             <div className="">
               <h2
-                style={{
-                  fontFamily: "sans-serif",
-                  fontSize: "1.6rem",
-                  color: COLORS.charcoal,
-                  fontWeight: 600,
-                }}
+                className="font-serif text-xl md:text-2xl text-[#1c2b22] font-semibold"
               >
                 Welcome back
               </h2>

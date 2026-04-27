@@ -7,7 +7,6 @@ from database import get_db
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import text
-import rag
 
 app = FastAPI()
 
@@ -40,6 +39,7 @@ def index():
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
+    import rag
     def sync_generator():
         try:
             for chunk in rag.stream_rag_response_sync(request.message):

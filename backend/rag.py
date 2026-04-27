@@ -14,12 +14,13 @@ from settings import settings
 
 MONGO_URI = settings.MONGO_URI
 MONGO_DBNAME = settings.MONGO_DBNAME
+GEMINI_API_KEY = settings.GEMINI_API_KEY
 
 COLLECTION_NAME = "embeddings_stream" 
 VECTORS_SEARCH_INDEX = "vector_index"  # Name of the vector search index
 
 MODEL_NAME = "gemini-2.5-flash-lite"  # LLM model name for generation
-LLM = ChatGoogleGenerativeAI(model=MODEL_NAME, streaming=True)
+LLM = ChatGoogleGenerativeAI(model=MODEL_NAME, streaming=True, api_key=GEMINI_API_KEY)
 
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 db = client[MONGO_DBNAME]

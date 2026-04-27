@@ -1,6 +1,17 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import Sidebar from "@/components/sidebar";
+
+function SidebarLayout({ children }: { children: React.ReactNode }) {
+  "use client";
+  return (
+    <SidebarProvider>
+      <Sidebar />
+      <SidebarInset>{children}</SidebarInset>
+    </SidebarProvider>
+  );
+}
 
 export default async function FuoyeLayout({
   children,
@@ -14,10 +25,5 @@ export default async function FuoyeLayout({
     redirect("/login");
   }
 
-  return (
-    <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-      <Sidebar />
-      {children}
-    </div>
-  );
+  return <SidebarLayout>{children}</SidebarLayout>;
 }

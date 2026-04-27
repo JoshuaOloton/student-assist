@@ -2,6 +2,7 @@
 
 import { COLORS } from "@/lib/constants";
 import Image from "next/image";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const Header = () => {
 
@@ -16,6 +17,7 @@ const Header = () => {
         gap: 12,
       }}
     >
+      <SidebarTrigger />
       <div
         style={{
           width: 36,
@@ -44,7 +46,6 @@ const Header = () => {
         </p>
         <p
           style={{
-            fontFamily: "sans-serif",
             fontSize: 12,
             color: COLORS.muted,
             margin: 0,
