@@ -38,7 +38,7 @@ export const Responses: Record<string, string[]> = {
 
     "Campus tours aren't officially listed, but you'll likely get a feel for the campus when you attend your screening or other required activities.\n\nIf you'd like to visit ahead of time, it's a good idea to reach out and ask for guidance on when and how you can come in.",
   ],
-  "Graduation requirements and process": [
+  "Graduation": [
     "To graduate, you'll need to successfully complete all required courses in your programme and meet the minimum credit units specified by your department. You must also ensure you've passed all core and elective courses without any outstanding results.\n\nIn addition, your academic records must be properly cleared, including course registration and results verification. Once everything is in order, you'll be eligible to proceed to the graduation stage.",
 
     "Graduation isn't just about finishing classes—you'll need to meet all academic requirements, including passing your courses and completing the required credit load. It's also important that there are no pending issues like incomplete results or unregistered courses.\n\nAfter that, you'll go through a clearance process where your records are checked and approved before you're officially listed for graduation.",

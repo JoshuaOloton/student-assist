@@ -16,21 +16,21 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   try {
-  //     const storedMessages = localStorage.getItem("messages");
-  //     if (!storedMessages) return;
+  useEffect(() => {
+    try {
+      const storedMessages = localStorage.getItem("messages");
+      if (!storedMessages) return;
 
-  //     const parsed  = JSON.parse(storedMessages);
-  //     if (Array.isArray(parsed)) {
-  //       setMessages(parsed as Message[]);
-  //     } else {
-  //       console.warn("stored messages is not array type");
-  //     }
-  //   } catch (e) {
-  //     console.error("Failed to parse stored messages:", e);
-  //   }
-  // }, []);
+      const parsed  = JSON.parse(storedMessages);
+      if (Array.isArray(parsed)) {
+        setMessages(parsed as Message[]);
+      } else {
+        console.warn("stored messages is not array type");
+      }
+    } catch (e) {
+      console.error("Failed to parse stored messages:", e);
+    }
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -131,20 +131,9 @@ export default function Page() {
             >
               {QUICK_TOPICS.map((t) => (
                 <button
+                  className="bg-white border border-[#d1e7d9] rounded-3xl p-3 md:px-4 md:py-3 cursor-pointer text-left transition-all duration-200 flex gap-3"
                   key={t.title}
                   onClick={() => sendMessage(t.title, t.prompt)}
-                  style={{
-                    background: "white",
-                    border: `1px solid ${COLORS.border}`,
-                    borderRadius: 12,
-                    padding: "14px 16px",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    transition: "all 0.2s",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 12,
-                  }}
                   onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.emerald; e.currentTarget.style.background = COLORS.softGreen; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.background = "white"; }}
                 >
