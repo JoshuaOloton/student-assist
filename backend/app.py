@@ -11,7 +11,8 @@ from sqlalchemy import text
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://student-assist.vercel.app"
 ]
 
 app.add_middleware(
@@ -53,12 +54,7 @@ async def chat(request: ChatRequest):
 @app.post("/search")
 async def search(request: SearchRequest, db: Session = Depends(get_db)):
     try:
-        print('request data')
-        print(request.department)
-        print(request.matricnum)
-        print(request.level)
         department_id = DEPARTMENTS.get(request.department.upper())
-        print(department_id)
 
         query = "SELECT id, matricnum, fullname, email, department, level, enrollment_date, status FROM records WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
         result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
