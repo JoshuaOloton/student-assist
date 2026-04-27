@@ -90,7 +90,7 @@ export default function Page() {
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100vh", background: COLORS.cream }}>
       {/* Header */}
-      <Header />
+      {/* <Header /> */}
 
       {/* Messages */}
       <div style={{ flex: 1, overflowY: "auto", padding: "2rem" }}>

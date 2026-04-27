@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import Sidebar from "@/components/sidebar";
+import Header from "@/components/header";
 
 function SidebarLayout({ children }: { children: React.ReactNode }) {
   "use client";
@@ -25,5 +26,8 @@ export default async function FuoyeLayout({
     redirect("/login");
   }
 
-  return <SidebarLayout>{children}</SidebarLayout>;
+  return <SidebarLayout>
+    <Header />
+    {children}
+  </SidebarLayout>;
 }
