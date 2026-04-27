@@ -2,14 +2,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from settings import settings
 
-# DATABASE_URL = "mssql+pyodbc://username:password@server:port/db_name?driver=ODBC+Driver+17+for+SQL+Server"
 
-# DATABASE_URL = settings.DATABASE_URL
+DB_USER = settings.DB_USER
+DB_PASSWORD = settings.DB_PASSWORD
+DB_HOST = settings.DB_HOST
+DB_PORT = settings.DB_PORT
+DB_NAME = settings.DB_NAME
 
-DATABASE_URL = (
-    "mssql+pyodbc://@(localdb)\\MSSQLLocalDB/FuoyeProject"
-    "?driver=ODBC+Driver+17+for+SQL+Server"
-    "&trusted_connection=yes")
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 engine = create_engine(
     DATABASE_URL,

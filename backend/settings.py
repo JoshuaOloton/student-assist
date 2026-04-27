@@ -9,7 +9,11 @@ class Settings(BaseSettings):
     MONGO_URI: str
     GEMINI_API_KEY: str
     MONGO_DBNAME: str
-    DATABASE_URL: str
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_HOST: str
+    DB_PORT: str
+    DB_NAME: str
 
     # Add this configuration
     model_config = SettingsConfigDict(

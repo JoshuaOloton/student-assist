@@ -59,7 +59,7 @@ pydeck
 Pygments
 pymongo
 pymongo-search-utils
-pyodbc
+psycopg2-binary
 python-dateutil
 python-dotenv
 python-multipart

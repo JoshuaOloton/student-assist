@@ -44,7 +44,7 @@ export default function SearchPage() {
             
           }
           const errorData = await response.json()
-          setError(errorData.error || 'An error occurred while searching')
+          setError(errorData.detail || 'An error occurred while searching')
           return
         }
   
@@ -98,15 +98,21 @@ export default function SearchPage() {
           </p>
         </div>
 
-        <SearchForm onSubmit={handleSearch} loading={loading} error={error} />
-
-        {searchResult && (
+        {!searchResult ? (
+          <SearchForm 
+            onSubmit={handleSearch} 
+            loading={loading} 
+            error={error} 
+          />
+        ): (
           <StudentInfoCard
             ref={cardRef}
             student={searchResult}
             onNewSearch={handleNewSearch}
           />
         )}
+
+      
       </div>
     </div>
   );
