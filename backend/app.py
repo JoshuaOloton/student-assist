@@ -56,7 +56,7 @@ async def search(request: SearchRequest, db: Session = Depends(get_db)):
     try:
         department_id = DEPARTMENTS.get(request.department.upper())
 
-        query = "SELECT id, matricnum, fullname, email, department, level, enrollment_date, status FROM records WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
+        query = "SELECT id, matricnum, fullname, email, department, level, enrollment_date, status, sex FROM records WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
         result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
         row = result.fetchone()
     except Exception as e:
@@ -73,7 +73,8 @@ async def search(request: SearchRequest, db: Session = Depends(get_db)):
         "department": row[4],
         "level": row[5],
         "enrollment_date": row[6],
-        "status": row[7]
+        "status": row[7],
+        "sex": row[8],
     }        
     
 

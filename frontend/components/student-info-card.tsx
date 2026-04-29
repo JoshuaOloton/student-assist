@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { CheckCircle2, Calendar, BookOpen, ArrowRight } from 'lucide-react'
+import { CheckCircle2, Calendar, BookOpen, ArrowRight, Mars, Venus } from 'lucide-react'
 import { StudentInfo } from '@/lib/types'
 import { forwardRef } from 'react'
 
@@ -94,6 +94,22 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
                 <span className="text-sm font-medium text-foreground">Level {student.level}</span>
               </div>
             </div>
+
+            {/* Sex */}
+            {student.sex && (
+              <div className="rounded-lg bg-muted/50 p-4 sm:col-span-2">
+                <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {student.sex === 'M' ? 
+                    <Mars className="h-3 w-3" /> : 
+                    <Venus className="h-3 w-3" />
+                  }
+                  Sex
+                </div>
+                <p className="text-sm font-medium text-foreground">
+                  {student.sex === 'M' ? "Male" : "Female"}
+                </p>
+              </div>
+            )}
 
             {/* Enrollment Date */}
             <div className="rounded-lg bg-muted/50 p-4 sm:col-span-2">

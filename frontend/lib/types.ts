@@ -13,6 +13,7 @@ export interface StudentInfo {
   level: string
   enrollment_date: string
   status: string
+  sex?: string
 }
 
 export interface Message {
