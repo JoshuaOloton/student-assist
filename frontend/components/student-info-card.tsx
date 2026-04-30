@@ -66,7 +66,7 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
           {/* Info Grid */}
           <div className="grid gap-4 sm:grid-cols-2">
             {/* Email */}
-            <div className="rounded-lg bg-muted/50 p-4">
+            <div className="rounded-lg bg-[#f0faf4] p-4">
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Email
               </p>
@@ -74,7 +74,7 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
             </div>
 
             {/* Program */}
-            <div className="rounded-lg bg-muted/50 p-4">
+            <div className="rounded-lg bg-[#f0faf4] p-4">
               <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 <BookOpen className="h-3 w-3" />
                 Program
@@ -83,7 +83,7 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
             </div>
 
             {/* Level */}
-            <div className="rounded-lg bg-muted/50 p-4 sm:col-span-2">
+            <div className="rounded-lg bg-[#f0faf4] p-4 sm:col-span-2">
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Level
               </p>
@@ -97,7 +97,7 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
 
             {/* Sex */}
             {student.sex && (
-              <div className="rounded-lg bg-muted/50 p-4">
+              <div className="rounded-lg bg-[#f0faf4] p-4">
                 <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {student.sex === 'M' ? 
                     <Mars className="h-3 w-3" /> : 
@@ -112,7 +112,7 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
             )}
 
             {/* Enrollment Date */}
-            <div className={`rounded-lg bg-muted/50 p-4 ${!student.sex && 'sm:col-span-2'}`}>
+            <div className={`rounded-lg bg-[#f0faf4] p-4 ${!student.sex && 'sm:col-span-2'}`}>
               <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 <Calendar className="h-3 w-3" />
                 Enrollment Date
