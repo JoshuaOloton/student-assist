@@ -126,8 +126,8 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
       {/* Action Button */}
       <Button
         onClick={onNewSearch}
-        variant="outline"
-        className="w-full sm:w-auto"
+        variant={'link'}
+        className="w-full sm:w-auto cursor-pointer"
         size="lg"
       >
         <ArrowRight className="mr-2 h-4 w-4" />
