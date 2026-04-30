@@ -17,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Student Enquiry Assistant",
+  title: "Federal Univeristy Oye Ekiti (FUOYE) - Student Enquiry Assistant",
   description: "AI-powered chatbot for student enquiries about admissions, courses, fees, campus life, and more.",
 };
 
