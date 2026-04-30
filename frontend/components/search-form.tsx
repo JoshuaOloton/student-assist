@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, CheckCircle2, ArrowLeft } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";

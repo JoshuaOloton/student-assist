@@ -2,8 +2,6 @@
 
 "use client";
 
-import { COLORS, } from "@/lib/constants";
-
 import { useState, useRef, useEffect } from "react";
 import SearchForm from "@/components/search-form";
 import { StudentInfo, StudentSearchData } from "@/lib/types";
@@ -11,7 +9,6 @@ import { StudentInfoCard } from "@/components/student-info-card";
 
 
 export default function SearchPage() {
-  const [searched, setSearched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
   const [searchResult, setSearchResult] = useState<StudentInfo | null>(null);
@@ -63,35 +60,11 @@ export default function SearchPage() {
     }
 
   return (
-    <div
-      style={{
-        flex: 1,
-        background: COLORS.cream,
-        padding: "2.5rem",
-        overflowY: "auto",
-      }}
-    >
-      <div style={{ maxWidth: 700, margin: "0 auto" }}>
-        <div style={{ marginBottom: "2rem" }}>
-          <h1
-            style={{
-              fontFamily: "'Georgia',serif",
-              fontSize: "2rem",
-              color: COLORS.charcoal,
-              fontWeight: "normal",
-              margin: "0 0 0.5rem",
-            }}
-          >
-            Student Status
-          </h1>
-          <p
-            style={{
-              fontFamily: "sans-serif",
-              fontSize: 14,
-              color: COLORS.muted,
-              margin: 0,
-            }}
-          >
+    <div className="flex-1 bg-[#fafdf7] p-10 overflow-y-auto">
+      <div className="max-w-2xl mx-auto my-0">
+        <div className="mb-8">
+          <h1 className="font-['Georgia',serif] text-2xl md:text-3xl text-[#1c2b22] font-normal m-0 mb-2">Student Status</h1>
+          <p className="font-[sans-serif] text-sm text-[#6b7c72] m-0">
             Provide your matric number along with your program details to verify
             your enrollment.
           </p>
@@ -110,8 +83,6 @@ export default function SearchPage() {
             onNewSearch={handleNewSearch}
           />
         )}
-
-      
       </div>
     </div>
   );

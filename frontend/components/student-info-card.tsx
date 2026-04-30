@@ -45,19 +45,19 @@ export const StudentInfoCard = forwardRef<HTMLDivElement, StudentInfoCardProps>(
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
         <Card className="border-border bg-linear-to-br from-card to-card/50 p-6">
           {/* Header with Status */}
-          <div className="mb-6 flex items-start justify-between">
+          <div className="mb-4 md:mb-6 flex flex-col-reverse md:flex-row items-start md:items-start gap-2 md:gap-0 justify-between">
             <div className="flex items-center gap-4">
-              <Avatar className="h-16 w-16 border-2 border-primary/20">
+              <Avatar className="h-10 w-10 md:h-16 md:w-16 border-2 border-primary/20">
                 <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                   {getInitials(student.fullname)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">{student.fullname}</h2>
+                <h2 className="text-lg md:text-2xl font-bold text-foreground">{student.fullname}</h2>
                 <p className="text-sm text-muted-foreground">{student.matricnum}</p>
               </div>
             </div>
-            <Badge className={`${getStatusColor(student.status)} border`}>
+            <Badge className={`${getStatusColor(student.status)} border self-end`}>
               <CheckCircle2 className="mr-1 h-3 w-3" />
               {student.status.charAt(0).toUpperCase() + student.status.slice(1)}
             </Badge>
