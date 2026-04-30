@@ -57,7 +57,7 @@ async def search(request: SearchRequest, db: Session = Depends(get_db)):
         department_id = DEPARTMENTS.get(request.department.upper())
 
         query = "SELECT id, matricnum, fullname, email, department, level, enrollment_date, status, sex FROM records WHERE matricnum LIKE :matricnum AND DepartmentID = :department_id AND level = :level"
-        result = db.execute(text(query), {"matricnum": request.matricnum, "department_id": department_id, "level": request.level})
+        result = db.execute(text(query), {"matricnum": request.matricnum.upper(), "department_id": department_id, "level": request.level})
         row = result.fetchone()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
