@@ -65,8 +65,7 @@ export default function SearchPage() {
         <div className="mb-8">
           <h1 className="font-['Georgia',serif] text-2xl md:text-3xl text-[#1c2b22] font-normal m-0 mb-2">Student Status</h1>
           <p className="font-[sans-serif] text-sm text-[#6b7c72] m-0">
-            Provide your matric number along with your program details to verify
-            your enrollment.
+            Provide student's matric number along with program details to verify enrollment.
           </p>
         </div>
 
